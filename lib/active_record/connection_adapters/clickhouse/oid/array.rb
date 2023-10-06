@@ -43,7 +43,11 @@ module ActiveRecord
 
           def serialize(value)
             if value.is_a?(::Array)
-              value.map { |item| serialize(item) }
+              if @subtype == :string
+                value.to_s.tr('"', "'")
+              else
+                value.map { |item| serialize(item) }
+              end
             else
               return value if value.nil?
               case @subtype
