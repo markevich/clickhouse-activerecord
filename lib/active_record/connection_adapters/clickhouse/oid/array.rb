@@ -45,6 +45,8 @@ module ActiveRecord
             if value.is_a?(::Array)
               if @subtype == :string
                 value.to_s.tr('"', "'")
+              elsif @subtype == :integer
+                value.to_s
               else
                 value.map { |item| serialize(item) }
               end
