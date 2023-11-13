@@ -48,7 +48,7 @@ module ActiveRecord
               elsif @subtype == :integer
                 value.to_s
               else
-                value.map { |item| serialize(item) }
+                value.map { |item| serialize(item) }.to_s.tr('"', "'")
               end
             else
               return value if value.nil?
